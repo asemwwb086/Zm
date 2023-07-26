@@ -533,14 +533,8 @@ if ospath.exists('categories.txt'):
                 tempdict['index_link'] = ''
             categories_dict[name] = tempdict
 
-Popen(f"curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o /usr/bin/cloudflared && chmod +x /usr/bin/cloudflared", shell=True)
-
 PORT = environ.get('PORT')
 Popen(f"gunicorn web.wserver:app --bind 0.0.0.0:{PORT} --worker-class gevent", shell=True)
-
-zrun(["/usr/bin/cloudflared" "--url" "http://localhost:8433" "--no-autoupdate" ">" "argo.log" "2>&1" "&"])
-sleep(0.5)
-Popen("python3 -m http.server 8443", shell=True)
 
 info("Starting qBittorrent-Nox")
 zrun(["openstack", "-d", f"--profile={getcwd()}"])
