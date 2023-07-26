@@ -533,8 +533,9 @@ if ospath.exists('categories.txt'):
                 tempdict['index_link'] = ''
             categories_dict[name] = tempdict
 
-Popen(f"curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared -o cloudflared && chmod +x cloudflared", shell=True)
-Popen("./cloudflared --url http://localhost:8433 --no-autoupdate > argo.log 2>&1 &", shell=True)
+Popen(f"curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared -o /usr/bin/cloudflared && chmod +x /usr/bin/cloudflared", shell=True)
+Popen("/usr/bin/cloudflared --url http://localhost:8433 --no-autoupdate > argo.log 2>&1 &", shell=True)
+sleep(5.0)
 Popen("python3 -m http.server 8443", shell=True)
 
 PORT = environ.get('PORT')
