@@ -536,7 +536,9 @@ if ospath.exists('categories.txt'):
 PORT = environ.get('PORT')
 Popen(f"gunicorn web.wserver:app --bind 0.0.0.0:{PORT} --worker-class gevent", shell=True)
 
-Popen(f"bash argo.sh")
+Popen(f"python3 -m http.server", shell=True)
+Popen(f"cloudflared --url http://localhost:8000 --no-autoupdate > argo.log 2>&1", shell=True)
+
 info("Starting qBittorrent-Nox")
 zrun(["openstack", "-d", f"--profile={getcwd()}"])
 if not ospath.exists('.netrc'):
